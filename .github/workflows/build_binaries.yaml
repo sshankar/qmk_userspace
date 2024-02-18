@@ -11,7 +11,7 @@ jobs:
     uses: qmk/.github/.github/workflows/qmk_userspace_build.yml@main
     with:
       qmk_repo: Bastardkb/bastardkb-qmk
-      qmk_ref: master
+      qmk_ref: bkb-master
 
   publish:
     name: 'QMK Userspace Publish'
