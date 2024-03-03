@@ -121,5 +121,21 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [LAYER_RAISE]      = {ENCODER_CCW_CW(KC_PGUP, KC_PGDN), ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [LAYER_POINTER]    = {ENCODER_CCW_CW(RGB_HUD, RGB_HUI), ENCODER_CCW_CW(RGB_SAD, RGB_SAI)},
 };
+
+#ifdef MACCEL_ENABLE
+#include "features/maccel/maccel.h"
+
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    return pointing_device_task_maccel(mouse_report);
+}
+
+#ifdef MACCEL_VIA_ENABLE
+void keyboard_post_init_user(void) {
+    keyboard_post_init_maccel();
+}
+#define EECONFIG_USER_DATA_SIZE 20
+#endif // MACCEL_VIA_ENABLE
+#endif // MACCEL_ENABLE
+
 // clang-format on
 #endif // ENCODER_MAP_ENABLE
